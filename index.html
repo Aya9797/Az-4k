@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZ4K | منصة الخلفيات والمحتوى السينمائي</title>
+
+    <!-- Tailwind CSS & Plugins -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        },
+                        dark: {
+                            bg: '#050507',
+                            card: '#0d0e12',
+                            border: 'rgba(255, 255, 255, 0.07)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050507;
+            color: #f3f4f6;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Ultra */
+        .glass-header {
+            background: rgba(5, 5, 7, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(13, 14, 18, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Smooth Masonry Grid */
+        .grid-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-auto-rows: 280px;
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .grid-masonry {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                grid-auto-rows: 380px;
+                gap: 24px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050507;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+    <!-- Top Navigation -->
+    <header class="sticky top-0 z-50 glass-header px-4 lg:px-8 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="location.reload()">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <i data-lucide="layers" class="w-5 h-5 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-black tracking-wider text-white flex items-center gap-1.5">
+                        AZ<span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold">4K</span>
+                    </h1>
+                    <p class="text-[10px] text-gray-400 font-medium">Ultra Visual Engine</p>
+                </div>
+            </div>
+
+            <!-- Tab Selector -->
+            <div class="flex p-1 bg-zinc-900/80 rounded-2xl border border-white/5 shadow-inner">
+                <button id="btn-photos" onclick="switchMode('photos')" class="flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 bg-blue-600 text-white shadow-lg shadow-blue-600/30">
+                    <i data-lucide="image" class="w-4 h-4"></i>
+                    <span>خلفيات 4K</span>
+                </button>
+                <button id="btn-videos" onclick="switchMode('videos')" class="flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white">
+                    <i data-lucide="video" class="w-4 h-4"></i>
+                    <span>مقاطع 9:16</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Hero & Content -->
+    <main class="max-w-7xl mx-auto px-4 lg:px-8 w-full flex-grow pt-8">
+        
+        <!-- Hero Search Section -->
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <h2 class="text-2xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">
+                أحدث المنصات المرئية للشاشات الحديثة
+            </h2>
+            <p class="text-xs md:text-sm text-gray-400 mb-6">خلفيات وفيديوهات فائقة الدقة مخصصة لصناع المحتوى ومستخدمي الهواتف الذكية.</p>
+            
+            <!-- Interactive Search -->
+            <form onsubmit="event.preventDefault(); handleSearch();" class="relative max-w-xl mx-auto">
+                <input type="text" id="searchInput" placeholder="ابحث عن: صحراء، طبيعة، مدن، سيارات..." 
+                       class="w-full bg-zinc-900/90 border border-white/10 rounded-2xl py-4 pr-12 pl-12 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition shadow-2xl">
+                <i data-lucide="search" class="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <button type="submit" class="absolute left-3 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-500 text-white text-xs px-4 py-2 rounded-xl font-bold transition">
+                    بحث
+                </button>
+            </form>
+        </div>
+
+        <!-- Monetag Banner Placement -->
+        <div class="w-full max-w-4xl mx-auto mb-8 min-h-[70px] glass-card rounded-2xl flex items-center justify-center border border-dashed border-zinc-800">
+            <span class="text-xs text-zinc-500 font-medium">مساحة الإعلان الإستراتيجي (Monetag Top Banner)</span>
+        </div>
+
+        <!-- Dynamic Grid -->
+        <div id="mediaGrid" class="grid-masonry">
+            <!-- Dynamic Content Load -->
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loader" class="flex justify-center my-16 hidden">
+            <div class="relative w-10 h-10">
+                <div class="w-10 h-10 rounded-full border-2 border-blue-600/20 border-t-blue-600 animate-spin"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-20 border-t border-white/5 py-8 text-center glass-header">
+        <p class="text-xs text-gray-500">© 2026 AZ4K ENGINE. مصمم لأعلى أداء وتجاوب مع الهواتف الذكية.</p>
+    </footer>
+
+    <!-- Script Section -->
+    <script>
+        lucide.createIcons();
+
+        let currentMode = 'photos';
+        const PEXELS_KEY = '563492ad6f917000010000013898031d255a47299a918a2455928d30'; 
+
+        async function fetchMedia(query = 'desert landscapes') {
+            const loader = document.getElementById('loader');
+            const grid = document.getElementById('mediaGrid');
+            
+            loader.classList.remove('hidden');
+            grid.innerHTML = '';
+
+            const url = currentMode === 'photos'
+                ? `https://api.pexels.com/v1/search?query=${query}&per_page=16&orientation=portrait`
+                : `https://api.pexels.com/videos/search?query=${query}&per_page=16&orientation=portrait`;
+
+            try {
+                const response = await fetch(url, {
+                    headers: { Authorization: PEXELS_KEY }
+                });
+                const data = await response.json();
+                loader.classList.add('hidden');
+
+                if (currentMode === 'photos') {
+                    renderPhotos(data.photos);
+                } else {
+                    renderVideos(data.videos);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                loader.classList.add('hidden');
+                grid.innerHTML = `<p class="text-center text-xs text-gray-500 col-span-full">عذراً، تعذر تحميل البيانات. يرجى محاولة التحديث.</p>`;
+            }
+        }
+
+        function renderPhotos(photos) {
+            const grid = document.getElementById('mediaGrid');
+            grid.innerHTML = '';
+
+            photos.forEach(photo => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-3xl overflow-hidden group relative flex flex-col justify-end transition-all duration-500 hover:-translate-y-1.5 shadow-2xl';
+                
+                card.innerHTML = `
+                    <img src="${photo.src.portrait}" alt="${photo.alt}" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition duration-300"></div>
+                    
+                    <div class="relative p-4 z-10 transform translate-y-2 group-hover:translate-y-0 transition duration-300">
+                        <span class="text-[10px] text-blue-400 font-bold tracking-wider uppercase bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded-full mb-2 inline-block">4K Ultra HD</span>
+                        <h3 class="text-xs font-semibold text-white mb-3 line-clamp-1">${photo.alt || 'خلفية فاخرة بدقة عالية'}</h3>
+                        <button onclick="triggerDownload('${photo.src.original}', 'az4k-wallpaper.jpg')" class="w-full bg-white/10 hover:bg-blue-600 backdrop-blur-xl text-white py-3 rounded-2xl text-xs font-bold transition duration-300 flex items-center justify-center gap-2 border border-white/20 shadow-lg">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            تحميل مجاني
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function renderVideos(videos) {
+            const grid = document.getElementById('mediaGrid');
+            grid.innerHTML = '';
+
+            videos.forEach(video => {
+                const videoFile = video.video_files.find(f => f.quality === 'hd') || video.video_files[0];
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-3xl overflow-hidden group relative flex flex-col justify-end transition-all duration-500 hover:-translate-y-1.5 shadow-2xl';
+                
+                card.innerHTML = `
+                    <video src="${videoFile.link}" poster="${video.image}" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105" loop muted playsinline onmouseover="this.play()" onmouseout="this.pause()" ontouchstart="this.paused ? this.play() : this.pause()"></video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition duration-300 pointer-events-none"></div>
+                    
+                    <div class="relative p-4 z-10 transform translate-y-2 group-hover:translate-y-0 transition duration-300">
+                        <span class="text-[10px] text-indigo-400 font-bold tracking-wider uppercase bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 rounded-full mb-2 inline-block">9:16 Video</span>
+                        <h3 class="text-xs font-semibold text-white mb-3 line-clamp-1">مقطع مرئي سينمائي</h3>
+                        <button onclick="triggerDownload('${videoFile.link}', 'az4k-video.mp4')" class="w-full bg-white/10 hover:bg-blue-600 backdrop-blur-xl text-white py-3 rounded-2xl text-xs font-bold transition duration-300 flex items-center justify-center gap-2 border border-white/20 shadow-lg">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            تحميل المقطع
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            const btnPhotos = document.getElementById('btn-photos');
+            const btnVideos = document.getElementById('btn-videos');
+
+            if (mode === 'photos') {
+                btnPhotos.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 bg-blue-600 text-white shadow-lg shadow-blue-600/30';
+                btnVideos.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white';
+            } else {
+                btnVideos.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 bg-blue-600 text-white shadow-lg shadow-blue-600/30';
+                btnPhotos.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white';
+            }
+            fetchMedia();
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value;
+            if (query.trim()) {
+                fetchMedia(query);
+            }
+        }
+
+        // Advanced Direct Download & Monetag Integration
+        async function triggerDownload(url, filename) {
+            // 1. فتح إعلان Monetag في نافذة جديدة (استبدل الرابط أدناه بـ Direct Link الخاص بك)
+            // window.open('YOUR_MONETAG_DIRECT_LINK', '_blank');
+
+            // 2. التحميل المباشر وتفادي مشاكل الحظر على الجوال
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = blobUrl;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(blobUrl);
+            } catch (err) {
+                window.open(url, '_blank');
+            }
+        }
+
+        // Fetch Initial Content
+        fetchMedia('desert 4k');
+    </script>
+</body>
+</html>

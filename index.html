@@ -1,304 +1,341 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
+ <!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AZ4K | منصة الخلفيات والمحتوى السينمائي</title>
-
-    <!-- Tailwind CSS & Plugins -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#eff6ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            900: '#1e3a8a',
-                        },
-                        dark: {
-                            bg: '#050507',
-                            card: '#0d0e12',
-                            border: 'rgba(255, 255, 255, 0.07)'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <title>AZ-8K | صور وفيديوهات بجودة فائقة</title>
+    <!-- استيراد خط عصرية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
         body {
-            background-color: #050507;
-            color: #f3f4f6;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #0f1115;
+            color: #ffffff;
             overflow-x: hidden;
         }
 
-        /* Glassmorphism Ultra */
-        .glass-header {
-            background: rgba(5, 5, 7, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        /* شريط التنقل العلوي */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #161a22;
+            border-bottom: 1px solid #262d3d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .glass-card {
-            background: rgba(13, 14, 18, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        /* Smooth Masonry Grid */
-        .grid-masonry {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            grid-auto-rows: 280px;
-            gap: 16px;
+        .menu-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 22px;
+            cursor: pointer;
         }
 
-        @media (min-width: 768px) {
-            .grid-masonry {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                grid-auto-rows: 380px;
-                gap: 24px;
-            }
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ff87, #60efff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: 1px;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
         }
-        ::-webkit-scrollbar-track {
-            background: #050507;
+
+        .btn {
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border: none;
+            transition: 0.3s;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #1f2937;
-            border-radius: 3px;
+
+        .btn-login {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid #3a445d;
+        }
+
+        .btn-login:hover {
+            background-color: #222938;
+        }
+
+        .btn-join {
+            background-color: #00ff87;
+            color: #0f1115;
+        }
+
+        .btn-join:hover {
+            background-color: #00cc6a;
+        }
+
+        /* واجهة البطل (Hero Section) مع شريط البحث */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(rgba(15, 17, 21, 0.7), rgba(15, 17, 21, 0.9)), 
+                        url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #a0aec0;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 650px;
+            display: flex;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 16px 20px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .search-box button {
+            background-color: #00ff87;
+            border: none;
+            padding: 0 25px;
+            color: #0f1115;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-box button:hover {
+            background-color: #00cc6a;
+        }
+
+        /* القائمة الجانبية (Drawer Menu) */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: #161a22;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.7);
+            transition: 0.4s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px 20px;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #262d3d;
+            padding-bottom: 15px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .sidebar-links {
+            list-style: none;
+            flex: 1;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar-links a {
+            color: #c5d0e6;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            padding: 8px 10px;
+            border-radius: 6px;
+        }
+
+        .sidebar-links a:hover {
+            background-color: #222938;
+            color: #00ff87;
+        }
+
+        /* وسائل التواصل الاجتماعي في القائمة الجانبية */
+        .sidebar-footer {
+            border-top: 1px solid #262d3d;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 12px;
+        }
+
+        .social-icons a {
+            color: #a0aec0;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #00ff87;
+        }
+
+        /* طبقة التعتيم الخلفية عند فتح القائمة */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: none;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+<body>
 
-    <!-- Top Navigation -->
-    <header class="sticky top-0 z-50 glass-header px-4 lg:px-8 py-4 transition-all duration-300">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-            
-            <!-- Logo -->
-            <div class="flex items-center gap-3 cursor-pointer" onclick="location.reload()">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
-                    <i data-lucide="layers" class="w-5 h-5 text-white"></i>
-                </div>
-                <div>
-                    <h1 class="text-lg font-black tracking-wider text-white flex items-center gap-1.5">
-                        AZ<span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold">4K</span>
-                    </h1>
-                    <p class="text-[10px] text-gray-400 font-medium">Ultra Visual Engine</p>
-                </div>
-            </div>
-
-            <!-- Tab Selector -->
-            <div class="flex p-1 bg-zinc-900/80 rounded-2xl border border-white/5 shadow-inner">
-                <button id="btn-photos" onclick="switchMode('photos')" class="flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 bg-blue-600 text-white shadow-lg shadow-blue-600/30">
-                    <i data-lucide="image" class="w-4 h-4"></i>
-                    <span>خلفيات 4K</span>
-                </button>
-                <button id="btn-videos" onclick="switchMode('videos')" class="flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white">
-                    <i data-lucide="video" class="w-4 h-4"></i>
-                    <span>مقاطع 9:16</span>
-                </button>
-            </div>
+    <!-- الشريط العلوي -->
+    <header>
+        <div class="logo-container">
+            <button class="menu-btn" id="openMenu"><i class="fas fa-bars"></i></button>
+            <a href="https://az-8k.vercel.app/" class="logo">AZ-8K</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn btn-login">تسجيل الدخول</button>
+            <button class="btn btn-join">إنضمام</button>
         </div>
     </header>
 
-    <!-- Main Hero & Content -->
-    <main class="max-w-7xl mx-auto px-4 lg:px-8 w-full flex-grow pt-8">
-        
-        <!-- Hero Search Section -->
-        <div class="text-center max-w-3xl mx-auto mb-10">
-            <h2 class="text-2xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">
-                أحدث المنصات المرئية للشاشات الحديثة
-            </h2>
-            <p class="text-xs md:text-sm text-gray-400 mb-6">خلفيات وفيديوهات فائقة الدقة مخصصة لصناع المحتوى ومستخدمي الهواتف الذكية.</p>
-            
-            <!-- Interactive Search -->
-            <form onsubmit="event.preventDefault(); handleSearch();" class="relative max-w-xl mx-auto">
-                <input type="text" id="searchInput" placeholder="ابحث عن: صحراء، طبيعة، مدن، سيارات..." 
-                       class="w-full bg-zinc-900/90 border border-white/10 rounded-2xl py-4 pr-12 pl-12 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition shadow-2xl">
-                <i data-lucide="search" class="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <button type="submit" class="absolute left-3 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-500 text-white text-xs px-4 py-2 rounded-xl font-bold transition">
-                    بحث
-                </button>
-            </form>
+    <!-- الواجهة الرئيسية -->
+    <section class="hero">
+        <h1>مكتبة الصور والفيديوهات الفائقة بدقة 8K و 4K</h1>
+        <p>اكتشف وحمل أرقى المحتويات المرئية والمناظر الطبيعية الخلابة بجودة لا تُضاهى.</p>
+        <div class="search-box">
+            <input type="text" placeholder="ابحث عن صور، فيديوهات، صحراء، طبيعة...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </section>
+
+    <!-- طبقة التعتيم -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- القائمة الجانبية المتقدمة -->
+    <div class="sidebar" id="sidebar">
+        <div>
+            <div class="sidebar-header">
+                <h2>القائمة الرئيسية</h2>
+                <button class="close-btn" id="closeMenu"><i class="fas fa-times"></i></button>
+            </div>
+            <ul class="sidebar-links">
+                <li><a href="https://az-8k.vercel.app/"><i class="fas fa-home"></i> الرئيسية (Home)</a></li>
+                <li><a href="#"><i class="fas fa-images"></i> استكشاف الصور (Explore Photos)</a></li>
+                <li><a href="#"><i class="fas fa-video"></i> الفيديوهات الحرة (Free Videos)</a></li>
+                <li><a href="#"><i class="fas fa-paint-brush"></i> خلفيات 4K (Wallpapers)</a></li>
+                <li><a href="#"><i class="fas fa-cloud-upload-alt"></i> رفع محتوى (Upload)</a></li>
+                <li><a href="#"><i class="fas fa-shield-alt"></i> التراخيص وسياسة الاستخدام (License)</a></li>
+                <li><a href="#"><i class="fas fa-code"></i> واجهة البرمجيات (API)</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> من نحن (About Us)</a></li>
+            </ul>
         </div>
 
-        <!-- Monetag Banner Placement -->
-        <div class="w-full max-w-4xl mx-auto mb-8 min-h-[70px] glass-card rounded-2xl flex items-center justify-center border border-dashed border-zinc-800">
-            <span class="text-xs text-zinc-500 font-medium">مساحة الإعلان الإستراتيجي (Monetag Top Banner)</span>
-        </div>
-
-        <!-- Dynamic Grid -->
-        <div id="mediaGrid" class="grid-masonry">
-            <!-- Dynamic Content Load -->
-        </div>
-
-        <!-- Loading Spinner -->
-        <div id="loader" class="flex justify-center my-16 hidden">
-            <div class="relative w-10 h-10">
-                <div class="w-10 h-10 rounded-full border-2 border-blue-600/20 border-t-blue-600 animate-spin"></div>
+        <div class="sidebar-footer">
+            <p style="font-size: 13px; color: #a0aec0;">تابعنا على المنصات</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
+    </div>
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="mt-20 border-t border-white/5 py-8 text-center glass-header">
-        <p class="text-xs text-gray-500">© 2026 AZ4K ENGINE. مصمم لأعلى أداء وتجاوب مع الهواتف الذكية.</p>
-    </footer>
-
-    <!-- Script Section -->
+    <!-- جافاسكريبت للتحكم بالقائمة الجانبية -->
     <script>
-        lucide.createIcons();
+        const openMenu = document.getElementById('openMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
 
-        let currentMode = 'photos';
-        const PEXELS_KEY = '563492ad6f917000010000013898031d255a47299a918a2455928d30'; 
+        openMenu.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
 
-        async function fetchMedia(query = 'desert landscapes') {
-            const loader = document.getElementById('loader');
-            const grid = document.getElementById('mediaGrid');
-            
-            loader.classList.remove('hidden');
-            grid.innerHTML = '';
+        closeMenu.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
 
-            const url = currentMode === 'photos'
-                ? `https://api.pexels.com/v1/search?query=${query}&per_page=16&orientation=portrait`
-                : `https://api.pexels.com/videos/search?query=${query}&per_page=16&orientation=portrait`;
-
-            try {
-                const response = await fetch(url, {
-                    headers: { Authorization: PEXELS_KEY }
-                });
-                const data = await response.json();
-                loader.classList.add('hidden');
-
-                if (currentMode === 'photos') {
-                    renderPhotos(data.photos);
-                } else {
-                    renderVideos(data.videos);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                loader.classList.add('hidden');
-                grid.innerHTML = `<p class="text-center text-xs text-gray-500 col-span-full">عذراً، تعذر تحميل البيانات. يرجى محاولة التحديث.</p>`;
-            }
-        }
-
-        function renderPhotos(photos) {
-            const grid = document.getElementById('mediaGrid');
-            grid.innerHTML = '';
-
-            photos.forEach(photo => {
-                const card = document.createElement('div');
-                card.className = 'glass-card rounded-3xl overflow-hidden group relative flex flex-col justify-end transition-all duration-500 hover:-translate-y-1.5 shadow-2xl';
-                
-                card.innerHTML = `
-                    <img src="${photo.src.portrait}" alt="${photo.alt}" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition duration-300"></div>
-                    
-                    <div class="relative p-4 z-10 transform translate-y-2 group-hover:translate-y-0 transition duration-300">
-                        <span class="text-[10px] text-blue-400 font-bold tracking-wider uppercase bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded-full mb-2 inline-block">4K Ultra HD</span>
-                        <h3 class="text-xs font-semibold text-white mb-3 line-clamp-1">${photo.alt || 'خلفية فاخرة بدقة عالية'}</h3>
-                        <button onclick="triggerDownload('${photo.src.original}', 'az4k-wallpaper.jpg')" class="w-full bg-white/10 hover:bg-blue-600 backdrop-blur-xl text-white py-3 rounded-2xl text-xs font-bold transition duration-300 flex items-center justify-center gap-2 border border-white/20 shadow-lg">
-                            <i data-lucide="download" class="w-4 h-4"></i>
-                            تحميل مجاني
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-            lucide.createIcons();
-        }
-
-        function renderVideos(videos) {
-            const grid = document.getElementById('mediaGrid');
-            grid.innerHTML = '';
-
-            videos.forEach(video => {
-                const videoFile = video.video_files.find(f => f.quality === 'hd') || video.video_files[0];
-                const card = document.createElement('div');
-                card.className = 'glass-card rounded-3xl overflow-hidden group relative flex flex-col justify-end transition-all duration-500 hover:-translate-y-1.5 shadow-2xl';
-                
-                card.innerHTML = `
-                    <video src="${videoFile.link}" poster="${video.image}" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105" loop muted playsinline onmouseover="this.play()" onmouseout="this.pause()" ontouchstart="this.paused ? this.play() : this.pause()"></video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition duration-300 pointer-events-none"></div>
-                    
-                    <div class="relative p-4 z-10 transform translate-y-2 group-hover:translate-y-0 transition duration-300">
-                        <span class="text-[10px] text-indigo-400 font-bold tracking-wider uppercase bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 rounded-full mb-2 inline-block">9:16 Video</span>
-                        <h3 class="text-xs font-semibold text-white mb-3 line-clamp-1">مقطع مرئي سينمائي</h3>
-                        <button onclick="triggerDownload('${videoFile.link}', 'az4k-video.mp4')" class="w-full bg-white/10 hover:bg-blue-600 backdrop-blur-xl text-white py-3 rounded-2xl text-xs font-bold transition duration-300 flex items-center justify-center gap-2 border border-white/20 shadow-lg">
-                            <i data-lucide="download" class="w-4 h-4"></i>
-                            تحميل المقطع
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-            lucide.createIcons();
-        }
-
-        function switchMode(mode) {
-            currentMode = mode;
-            const btnPhotos = document.getElementById('btn-photos');
-            const btnVideos = document.getElementById('btn-videos');
-
-            if (mode === 'photos') {
-                btnPhotos.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 bg-blue-600 text-white shadow-lg shadow-blue-600/30';
-                btnVideos.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white';
-            } else {
-                btnVideos.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 bg-blue-600 text-white shadow-lg shadow-blue-600/30';
-                btnPhotos.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white';
-            }
-            fetchMedia();
-        }
-
-        function handleSearch() {
-            const query = document.getElementById('searchInput').value;
-            if (query.trim()) {
-                fetchMedia(query);
-            }
-        }
-
-        // Advanced Direct Download & Monetag Integration
-        async function triggerDownload(url, filename) {
-            // 1. فتح إعلان Monetag في نافذة جديدة (استبدل الرابط أدناه بـ Direct Link الخاص بك)
-            // window.open('YOUR_MONETAG_DIRECT_LINK', '_blank');
-
-            // 2. التحميل المباشر وتفادي مشاكل الحظر على الجوال
-            try {
-                const response = await fetch(url);
-                const blob = await response.blob();
-                const blobUrl = window.URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.href = blobUrl;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(blobUrl);
-            } catch (err) {
-                window.open(url, '_blank');
-            }
-        }
-
-        // Fetch Initial Content
-        fetchMedia('desert 4k');
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
     </script>
+
 </body>
 </html>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AZ-8K | Premium 8K & 4K Visuals</title>
+    <title>AZ-8K | منصة الوسائط الفائقة</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Cairo', sans-serif;
         }
 
         body {
@@ -57,7 +57,6 @@
             font-size: 15px;
             font-weight: 600;
             transition: 0.3s;
-            cursor: pointer;
         }
 
         .nav-links a:hover {
@@ -93,15 +92,14 @@
         }
 
         .hero-section h1 {
-            font-size: 42px;
+            font-size: 38px;
             font-weight: 900;
             margin-bottom: 15px;
-            letter-spacing: -0.5px;
         }
 
         .hero-section p {
             color: #a0aec0;
-            font-size: 17px;
+            font-size: 16px;
             margin-bottom: 35px;
             max-width: 650px;
         }
@@ -118,17 +116,18 @@
 
         .search-container input {
             flex: 1;
-            padding: 18px 22px;
+            padding: 16px 20px;
             border: none;
             outline: none;
             font-size: 16px;
             color: #111;
+            text-align: right;
         }
 
         .search-container button {
             background-color: #00ff87;
             border: none;
-            padding: 0 28px;
+            padding: 0 25px;
             color: #0b0d10;
             font-size: 18px;
             cursor: pointer;
@@ -209,14 +208,13 @@
         .badge-8k {
             position: absolute;
             top: 15px;
-            right: 15px;
+            left: 15px;
             background-color: rgba(0, 255, 135, 0.95);
             color: #0b0d10;
             padding: 5px 12px;
             font-size: 12px;
             font-weight: 800;
             border-radius: 6px;
-            letter-spacing: 0.5px;
         }
 
         .media-info {
@@ -258,7 +256,64 @@
             color: #0b0d10;
         }
 
-        /* Modal Popup للتحميل والمعاينة */
+        /* نافذة الرفع (Upload Modal) */
+        .upload-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .upload-modal.active {
+            display: flex;
+        }
+
+        .upload-content {
+            background-color: #161b22;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            padding: 25px;
+            border: 1px solid #263042;
+            position: relative;
+        }
+
+        .upload-content h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #00ff87;
+        }
+
+        .upload-form input, .upload-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background-color: #0b0d10;
+            border: 1px solid #263042;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .upload-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #00ff87;
+            color: #0b0d10;
+            border: none;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* نافذة المعاينة والتحميل */
         .modal {
             display: none;
             position: fixed;
@@ -296,46 +351,15 @@
             margin-bottom: 15px;
         }
 
-        .modal-content h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .modal-content p {
-            color: #8b9bb4;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
         .close-modal {
             position: absolute;
             top: 15px;
-            right: 20px;
+            left: 20px;
             background: none;
             border: none;
             color: #fff;
             font-size: 24px;
             cursor: pointer;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .modal-actions a {
-            padding: 10px 20px;
-            background-color: #00ff87;
-            color: #0b0d10;
-            font-weight: 700;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .modal-actions a:hover {
-            background-color: #00cc6a;
         }
 
         /* Footer */
@@ -356,128 +380,132 @@
     <header>
         <a href="https://az-8k.vercel.app/" class="logo">AZ-8K</a>
         <div class="nav-links">
-            <a href="https://az-8k.vercel.app/">Home</a>
-            <button class="upload-btn-nav" id="openUploadBtn"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+            <button class="upload-btn-nav" id="openUploadModal"><i class="fas fa-cloud-upload-alt"></i> رفع صورة جديدة</button>
         </div>
     </header>
 
     <!-- Hero Section with Search -->
     <section class="hero-section">
-        <h1>Discover 8K & 4K Ultra HD Visuals</h1>
-        <p>Explore and download breathtaking cinematic stock photos, desert landscapes, and nature videos.</p>
+        <h1>اكتشف صورًا وفيديوهات فائقة الدقة 8K و 4K</h1>
+        <p>استكشف وحمل أروع المناظر الطبيعية واللقطات السينمائية الاحترافية.</p>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search high-resolution photos, 8K videos, nature, desert...">
-            <button id="searchBtn"><i class="fas fa-search"></i></button>
+            <input type="text" id="searchInput" placeholder="ابحث عن صور عالية الدقة، صحراء، طبيعة...">
+            <button><i class="fas fa-search"></i></button>
         </div>
     </section>
 
     <!-- Categories Filter Bar -->
     <div class="categories-bar">
-        <span class="cat-tag active" data-category="all">All</span>
-        <span class="cat-tag" data-category="sahara">Sahara Dunes</span>
-        <span class="cat-tag" data-category="cinematic">Cinematic 8K</span>
-        <span class="cat-tag" data-category="nature">Nature & Wildlife</span>
+        <span class="cat-tag active" data-category="all">الجميع</span>
+        <span class="cat-tag" data-category="sahara">كثبان الصحراء الكبرى</span>
+        <span class="cat-tag" data-category="cinematic">سينمائي بدقة 8K</span>
+        <span class="cat-tag" data-category="nature">الطبيعة والحياة البرية</span>
     </div>
 
     <!-- Gallery Grid -->
     <div class="gallery-container" id="galleryGrid">
         
         <!-- Card 1 -->
-        <div class="media-card" data-category="sahara" data-title="Serene Desert Horizon">
-            <div class="media-preview" onclick="openModal('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=90', 'Serene Desert Horizon', 'Pure cinematic view showcasing the enchanting beauty of open desert dunes and vast horizons.')">
-                <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80" alt="Sahara View">
+        <div class="media-card" data-category="sahara" data-title="سكون الصحراء والآفاق الواسعة">
+            <div class="media-preview" onclick="openModal('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=90', 'سكون الصحراء والآفاق الواسعة', 'مشهد سينمائي نقي يعكس جمال الطبيعة الصحراوية الساحرة.')">
+                <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80" alt="Sahara">
                 <span class="badge-8k">8K ULTRA</span>
             </div>
             <div class="media-info">
-                <div class="media-title">Serene Desert Horizon</div>
-                <div class="media-desc">Pure cinematic view showcasing the enchanting beauty of open desert dunes and vast horizons.</div>
-                <button class="download-btn" onclick="openModal('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=90', 'Serene Desert Horizon', 'Pure cinematic view showcasing the enchanting beauty of open desert dunes and vast horizons.')"><i class="fas fa-download"></i> Download Original</button>
-            </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="media-card" data-category="cinematic" data-title="Journey Across Horizons">
-            <div class="media-preview" onclick="openModal('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=90', 'Journey Across Horizons', 'High-resolution professional footage perfect for video editing and content creators.')">
-                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80" alt="Nature Scene">
-                <span class="badge-8k">4K HD</span>
-            </div>
-            <div class="media-info">
-                <div class="media-title">Journey Across Horizons</div>
-                <div class="media-desc">High-resolution professional footage perfect for video editing and content creators.</div>
-                <button class="download-btn" onclick="openModal('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=90', 'Journey Across Horizons', 'High-resolution professional footage perfect for video editing and content creators.')"><i class="fas fa-download"></i> Download Original</button>
-            </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="media-card" data-category="sahara" data-title="Golden Sand Dunes">
-            <div class="media-preview" onclick="openModal('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=90', 'Golden Sand Dunes', 'Natural lighting and stunning visual details engineered for creative professionals.')">
-                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" alt="Desert Dunes">
-                <span class="badge-8k">8K ULTRA</span>
-            </div>
-            <div class="media-info">
-                <div class="media-title">Golden Sand Dunes</div>
-                <div class="media-desc">Natural lighting and stunning visual details engineered for creative professionals.</div>
-                <button class="download-btn" onclick="openModal('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=90', 'Golden Sand Dunes', 'Natural lighting and stunning visual details engineered for creative professionals.')"><i class="fas fa-download"></i> Download Original</button>
+                <div class="media-title">سكون الصحراء والآفاق الواسعة</div>
+                <div class="media-desc">مشهد سينمائي نقي يعكس جمال الطبيعة الصحراوية الساحرة.</div>
+                <button class="download-btn" onclick="openModal('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=90', 'سكون الصحراء والآفاق الواسعة', 'مشهد سينمائي نقي يعكس جمال الطبيعة الصحراوية الساحرة.')"><i class="fas fa-download"></i> تحميل بجودة اصلية</button>
             </div>
         </div>
 
     </div>
 
-    <!-- Modal نافذة التحميل والمعاينة -->
+    <!-- نافذة رفع الملفات (Upload Modal) -->
+    <div class="upload-modal" id="uploadModal">
+        <div class="upload-content">
+            <h2>إضافة صورة أو لقطة جديدة</h2>
+            <div class="upload-form">
+                <input type="text" id="imageTitle" placeholder="عنوان الصورة (مثلاً: رمال الصحراء)">
+                <textarea id="imageDesc" placeholder="وصف قصير للمشهد..." rows="3"></textarea>
+                <input type="text" id="imageUrl" placeholder="رابط الصورة المباشر (رابط من الإنترنت)">
+                <button id="submitUpload">نشر في المعرض فوراً</button>
+                <button type="button" id="closeUploadModal" style="background:none; color:#a0aec0; margin-top:10px; border:none; width:100%; cursor:pointer;">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة المعاينة والتحميل -->
     <div class="modal" id="mediaModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">&times;</button>
             <img id="modalImg" src="" alt="Preview">
-            <h3 id="modalTitle"></h3>
-            <p id="modalDesc"></p>
-            <div class="modal-actions">
-                <a id="modalDownloadBtn" href="" target="_blank" download><i class="fas fa-download"></i> Free Download (8K)</a>
-            </div>
+            <h3 id="modalTitle" style="margin-bottom:10px;"></h3>
+            <p id="modalDesc" style="color:#8b9bb4; margin-bottom:20px;"></p>
+            <a id="modalDownloadBtn" href="" target="_blank" download style="display:inline-block; padding:10px 20px; background-color:#00ff87; color:#0b0d10; font-weight:700; border-radius:6px; text-decoration:none;"><i class="fas fa-download"></i> تحميل الدقة الأصلية</a>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>AZ-8K Platform © 2026 - All Rights Reserved</p>
+        <p>منصة AZ-8K © 2026 - جميع الحقوق محفوظة</p>
     </footer>
 
-    <!-- JavaScript التفاعلي للبحث والفلاتر والنوافذ -->
+    <!-- JavaScript التفاعلي -->
     <script>
-        // نظام البحث التفاعلي الفوري
+        // البحث الفوري
         const searchInput = document.getElementById('searchInput');
-        const cards = document.querySelectorAll('.media-card');
-
         searchInput.addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
-            cards.forEach(card => {
+            document.querySelectorAll('.media-card').forEach(card => {
                 const title = card.getAttribute('data-title').toLowerCase();
-                if (title.includes(term)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = title.includes(term) ? 'block' : 'none';
             });
         });
 
-        // نظام فلاتر الأقسام
-        const catTags = document.querySelectorAll('.cat-tag');
-        catTags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                catTags.forEach(t => t.classList.remove('active'));
-                tag.classList.add('active');
-                const cat = tag.getAttribute('data-category');
+        // نافذة الرفع
+        const uploadModal = document.getElementById('uploadModal');
+        document.getElementById('openUploadModal').addEventListener('click', () => uploadModal.classList.add('active'));
+        document.getElementById('closeUploadModal').addEventListener('click', () => uploadModal.classList.remove('active'));
 
-                cards.forEach(card => {
-                    if (cat === 'all' || card.getAttribute('data-category') === cat) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
+        // إضافة صورة جديدة مباشرة للمعرض
+        document.getElementById('submitUpload').addEventListener('click', () => {
+            const title = document.getElementById('imageTitle').value;
+            const desc = document.getElementById('imageDesc').value;
+            const url = document.getElementById('imageUrl').value;
+
+            if(!title || !url) {
+                alert('الرجاء إدخال عنوان الصورة والرابط على الأقل!');
+                return;
+            }
+
+            const grid = document.getElementById('galleryGrid');
+            const newCard = document.createElement('div');
+            newCard.className = 'media-card';
+            newCard.setAttribute('data-category', 'sahara');
+            newCard.setAttribute('data-title', title);
+            
+            newCard.innerHTML = `
+                <div class="media-preview" onclick="openModal('${url}', '${title}', '${desc}')">
+                    <img src="${url}" alt="${title}">
+                    <span class="badge-8k">8K ULTRA</span>
+                </div>
+                <div class="media-info">
+                    <div class="media-title">${title}</div>
+                    <div class="media-desc">${desc}</div>
+                    <button class="download-btn" onclick="openModal('${url}', '${title}', '${desc}')"><i class="fas fa-download"></i> تحميل بجودة اصلية</button>
+                </div>
+            `;
+
+            grid.prepend(newCard);
+            uploadModal.classList.remove('active');
+            
+            // تفريغ الحقول
+            document.getElementById('imageTitle').value = '';
+            document.getElementById('imageDesc').value = '';
+            document.getElementById('imageUrl').value = '';
         });
 
-        // نظام النافذة المنبثقة (Modal) للتحميل
+        // نافذة المعاينة
         const modal = document.getElementById('mediaModal');
         const modalImg = document.getElementById('modalImg');
         const modalTitle = document.getElementById('modalTitle');
@@ -495,11 +523,6 @@
         function closeModal() {
             modal.classList.remove('active');
         }
-
-        // تنبيه زر الرفع مؤقتاً لحين ربطه برفع الملفات
-        document.getElementById('openUploadBtn').addEventListener('click', () => {
-            alert('Upload feature: You can add your custom images and videos directly by editing the HTML code or connecting to cloud storage later!');
-        });
     </script>
 </body>
 </html>
